@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 //Middleware
-if(app.get('env') === 'development'){
+if(process.env.NODE_ENV !== 'production'){
     app.use(morgan('tiny'));
     console.log('Morgan enabled...');
 }
