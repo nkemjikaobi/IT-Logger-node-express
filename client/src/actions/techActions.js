@@ -16,7 +16,7 @@ export const getTechs = () => async dispatch => {     //getState is an additiona
     } catch (error) {
         dispatch({
             type: TECHS_ERROR,
-            payload: error.response.statusText
+            payload: error.response.status
         })
     }
 }

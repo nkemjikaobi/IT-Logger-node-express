@@ -5,8 +5,7 @@ const LogSchema = mongoose.Schema({
         required: true
     },
     attention: {
-        type: Boolean,
-        default: false
+        type: Boolean
     },
     date: {
         type: Date,

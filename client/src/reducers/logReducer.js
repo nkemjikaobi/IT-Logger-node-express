@@ -7,13 +7,15 @@ import {
     CLEAR_CURRENT,
     SET_CURRENT,
     SEARCH_LOGS,
-    UPDATE_LOG
+    UPDATE_LOG,
+    CLEAR_LOGS
 } from '../actions/types'
 const initialState = {
     logs: null,
     current: null,
     loading: false,
-    error: null
+    error: null,
+    filtered: null
 };
 
 const logReducer = (state = initialState, action) => {
@@ -39,11 +41,15 @@ const logReducer = (state = initialState, action) => {
         case SEARCH_LOGS:
             return {
                 ...state,
-                //logs: action.payload
-                logs: state.logs.filter(log => {
+                filtered: state.logs.filter(log => {
                     const regex = new RegExp(`${action.payload}`,'gi');
                     return log.message.match(regex) || log.tech.match(regex);
                 })
+            }
+        case CLEAR_LOGS:
+            return {
+                ...state,
+                filtered: null
             }
         case DELETE_LOG:
             return {

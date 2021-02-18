@@ -1,4 +1,4 @@
-import {GET_LOGS, SET_LOADING, LOGS_ERROR, SEARCH_LOGS, ADD_LOG, DELETE_LOG, UPDATE_LOG, SET_CURRENT, CLEAR_CURRENT } from './types'
+import {GET_LOGS, SET_LOADING, LOGS_ERROR, SEARCH_LOGS, ADD_LOG, DELETE_LOG, UPDATE_LOG, SET_CURRENT, CLEAR_CURRENT, CLEAR_LOGS } from './types'
 
 //Get logs
 export const getLogs = () => async dispatch => {     //getState is an additional parameter for the functin that can be added
@@ -16,7 +16,7 @@ export const getLogs = () => async dispatch => {     //getState is an additional
     } catch (error) {
         dispatch({
             type: LOGS_ERROR,
-            payload: error.response.msg
+            payload: error.response
         })
     }
 }
@@ -43,7 +43,7 @@ export const addLog = (log) => async dispatch => {     //getState is an addition
     } catch (error) {
         dispatch({
             type: LOGS_ERROR,
-            payload: error.response.msg
+            payload: error.response
         })
     }
 }
@@ -78,25 +78,16 @@ export const updateLog = (log) => async dispatch => {     //getState is an addit
 //Search logs
 export const searchLogs = (text) => dispatch => {     //getState is an additional parameter for the functin that can be added
   
-    //set loading to true
-    // setLoading();
-    // try {
-    //     const res = await fetch(`/api/logs?q=${text}`);
-    //     const data = await res.json();
-
-    //     dispatch({
-    //         type: SEARCH_LOGS,
-    //         payload: data
-    //     })
-    // } catch (error) {
-    //     dispatch({
-    //         type: LOGS_ERROR,
-    //         payload: error.response.msg
-    //     })
-    // }
     dispatch({
         type: SEARCH_LOGS,
         payload: text
+    })
+}
+
+//Clear Log
+export const clearLogs = () => dispatch => {
+    dispatch({
+        type: CLEAR_LOGS
     })
 }
 
