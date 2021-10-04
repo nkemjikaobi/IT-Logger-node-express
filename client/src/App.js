@@ -1,13 +1,10 @@
 import React, {Fragment, useEffect } from 'react';
-import SearchBar from './components/layouts/Searchbar'
-import Logs from './components/logs/Logs'
-import AddBtn from './components/layouts/AddBtn'
-import AddLogModal from './components/logs/AddLogModal';
-import EditLogModal from './components/logs/EditLogModal';
-import AddTechModal from './components/techs/AddTechModal';
-import TechListModal from './components/techs/TechListModal';
 import { Provider } from 'react-redux';
 import store from './store';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from "./components/Login";
+import Home from "./components/Pages/Home";
+
 
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
@@ -18,20 +15,17 @@ const App = () => {
     M.AutoInit();
   });
   return (
-    <Provider store={store}>
-      <Fragment>
-        <SearchBar />
-        <div className="container">
-          <AddBtn />
-          <AddLogModal/>
-          <EditLogModal />
-          <AddTechModal />
-          <TechListModal />
-          <Logs />
-        </div>
-      </Fragment>
-    </Provider>
-  );
+		<Provider store={store}>
+			<Router>
+				<Switch>
+					<Fragment>
+						<Route exact path='/' component={Login} />
+						<Route exact path='/home' component={Home} />
+					</Fragment>
+				</Switch>
+			</Router>
+		</Provider>
+	);
 }
 
 export default App;

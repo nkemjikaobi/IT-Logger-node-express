@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { getLogs, clearLogs, searchLogs } from '../../actions/logActions'
 
 
-const Logs = ({ log: { logs, loading , filtered }, getLogs, searchLogs}) => {
+const Logs = ({ log: { logs, loading ,list, filtered }, getLogs, searchLogs}) => {
 
     useEffect(() => {
         getLogs();
@@ -19,6 +19,9 @@ const Logs = ({ log: { logs, loading , filtered }, getLogs, searchLogs}) => {
     if(!loading && logs.length === 0 ){
         return <p className='center'>No logs to show...</p>
     }
+    if (list !== null) {
+        console.log("list is busy");
+    }
     // if(logs !== null && filtered === null ){
     //     return <p className='center'>No logs from search</p>
     // }
@@ -26,15 +29,14 @@ const Logs = ({ log: { logs, loading , filtered }, getLogs, searchLogs}) => {
     //     return <p className='center'>No logs from search</p>
     // }
     return (
-        <ul className='collection with-header'>
+        <ul className='collection with-header searchContainer'>
             <li className="collection-header">
-                <h4 className="center">System Logs</h4>
+                <h4 className="center">Search Results</h4>
             </li>
                 {filtered !== null
                  ? filtered.map(log =>
                     <LogItem key={log._id} log={log}/>)
-                : logs.map(log =>
-                    <LogItem key={log._id} log={log}/>)
+                : <div>No result</div>
                 }
         </ul>
     )

@@ -1,4 +1,4 @@
-import {GET_LOGS, SET_LOADING, LOGS_ERROR, SEARCH_LOGS, ADD_LOG, DELETE_LOG, UPDATE_LOG, SET_CURRENT, CLEAR_CURRENT, CLEAR_LOGS } from './types'
+import {GET_LOGS, SET_LOADING, ADD_LIST, LOGS_ERROR, SEARCH_LOGS, ADD_LOG, DELETE_LOG, UPDATE_LOG, SET_CURRENT, CLEAR_CURRENT, CLEAR_LOGS } from './types'
 
 //Get logs
 export const getLogs = () => async dispatch => {     //getState is an additional parameter for the functin that can be added
@@ -6,8 +6,11 @@ export const getLogs = () => async dispatch => {     //getState is an additional
     //set loading to true
     setLoading();
     try {
-        const res = await fetch('/api/logs');
+        const res = await fetch(
+					'http://api.countrylayer.com/v2/all?access_key=bbfb2fef2dd05a2a4d0385f9ea60903e'
+				);
         const data = await res.json();
+
 
         dispatch({
             type: GET_LOGS,
@@ -47,6 +50,8 @@ export const addLog = (log) => async dispatch => {     //getState is an addition
         })
     }
 }
+
+
 
 //Edit log
 export const updateLog = (log) => async dispatch => {     //getState is an additional parameter for the functin that can be added
@@ -135,3 +140,22 @@ export const setLoading = () => {
         type: SET_LOADING
     }
 }
+
+export const addList = list => {
+    setLoading();
+    return {
+        type: ADD_LIST,
+        payload: list
+    }
+	// try {
+	// 	dispatch({
+	// 		type: ADD_LIST,
+	// 		payload: list,
+	// 	});
+	// } catch (error) {
+	// 	dispatch({
+	// 		type: LOGS_ERROR,
+	// 		payload: 'Error adding to list',
+	// 	});
+	// }
+};
